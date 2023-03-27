@@ -1,0 +1,36 @@
+{
+    "name": "php-middleware/request-id",
+    "description": "Request Id middleware with PSR-7",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "middleware",
+        "psr",
+        "psr-7",
+        "request-id"
+    ],
+    "require": {
+        "php": "^7.1 | ^8.0",
+        "psr/http-message": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "require-dev": {
+        "ramsey/uuid": "^3.9.3",
+        "laminas/laminas-diactoros": "^2.2.1",
+        "phpunit/phpunit": "^7.5.20 | ^8.5.8 | ^9.4.2"
+    },
+    "suggest": {
+        "ramsey/uuid": "To use Ramsey\\Uuid 3.0 generator"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpMiddleware\\RequestId\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpMiddlewareTest\\RequestId\\": "test/"
+        }
+    }
+}

@@ -1,0 +1,115 @@
+{
+    "name": "shlinkio/shlink-common",
+    "type": "project",
+    "homepage": "https://shlink.io",
+    "description": "Common tools used by Shlink",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alejandro Celaya Alastrué",
+            "homepage": "https://www.alejandrocelaya.com",
+            "email": "alejandro@alejandrocelaya.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-fileinfo": "*",
+        "akrabat/ip-address-middleware": "^2.1",
+        "cakephp/chronos": "^2.3",
+        "doctrine/orm": "^2.14",
+        "endroid/qr-code": "^4.4",
+        "fig/http-message-util": "^1.1",
+        "guzzlehttp/guzzle": "^7.4",
+        "laminas/laminas-config": "^3.7",
+        "laminas/laminas-diactoros": "^2.14",
+        "laminas/laminas-inputfilter": "^2.19",
+        "laminas/laminas-servicemanager": "^3.16",
+        "lcobucci/jwt": "^4.1",
+        "lstrojny/functional-php": "^1.17",
+        "monolog/monolog": "^3.2",
+        "php-amqplib/php-amqplib": "^3.2",
+        "predis/predis": "^2.0",
+        "psr/http-server-middleware": "^1.0",
+        "shlinkio/shlink-config": "^2.0",
+        "symfony/cache": "^6.1",
+        "symfony/lock": "^6.1",
+        "symfony/mercure": "^0.6",
+        "symfony/string": "^6.1",
+        "symfony/translation-contracts": "^2.5",
+        "symfony/var-exporter": "^6.2"
+    },
+    "require-dev": {
+        "infection/infection": "^0.26.15",
+        "laminas/laminas-stratigility": "^3.8",
+        "mezzio/mezzio-problem-details": "^1.6",
+        "pagerfanta/core": "^3.6",
+        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "psr/simple-cache": "^3.0 | ^2.0",
+        "roave/security-advisories": "dev-master",
+        "shlinkio/php-coding-standard": "~2.3.0",
+        "symfony/var-dumper": "^6.1"
+    },
+    "suggest": {
+        "mezzio/mezzio-problem-details": "To log ProblemDetailsMiddleware errors using the ErrorLogger",
+        "laminas/laminas-stratigility": "To log ErrorHandler errors using the ErrorLogger",
+        "pagerfanta/core": "To use the PagerfantaUtilsTrait"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shlinkio\\Shlink\\Common\\": "src"
+        },
+        "files": [
+            "functions/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShlinkioTest\\Shlink\\Common\\": "test"
+        }
+    },
+    "scripts": {
+        "ci": [
+            "@cs",
+            "@stan",
+            "@test:ci",
+            "@infect:ci"
+        ],
+        "cs": "phpcs",
+        "cs:fix": "phpcbf",
+        "stan": "phpstan analyse src test config functions --level=8",
+        "test": "phpdbg -qrr vendor/bin/phpunit --order-by=random --testdox --colors=always",
+        "test:ci": "@test --coverage-clover=build/clover.xml --coverage-xml=build/coverage-xml --log-junit=build/junit.xml",
+        "test:pretty": "@test --coverage-html build/coverage-html",
+        "infect": "infection --threads=4 --min-msi=85 --log-verbosity=default --only-covered --only-covering-test-cases",
+        "infect:ci": "@infect --coverage=build --skip-initial-tests",
+        "infect:show": "@infect --show-mutations",
+        "infect:show:ci": "@infect:ci --show-mutations",
+        "infect:test": [
+            "@test:ci",
+            "@infect:show:ci"
+        ]
+    },
+    "scripts-descriptions": {
+        "ci": "<fg=blue;options=bold>Alias for \"cs\", \"stan\", \"test:ci\" and \"infect:ci\"</>",
+        "cs": "<fg=blue;options=bold>Checks coding styles</>",
+        "cs:fix": "<fg=blue;options=bold>Fixes coding styles, when possible</>",
+        "stan": "<fg=blue;options=bold>Inspects code with phpstan</>",
+        "test": "<fg=blue;options=bold>Runs unit tests with no coverage reports</>",
+        "test:ci": "<fg=blue;options=bold>Runs unit tests generating coverage reports and logs</>",
+        "test:pretty": "<fg=blue;options=bold>Runs unit tests generating coverage reports in html</>",
+        "infect": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing</>",
+        "infect:ci": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing with existing reports and logs</>",
+        "infect:show": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing and shows applied mutators</>",
+        "infect:show:ci": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing with existing reports and logs and shows applied mutators</>",
+        "infect:test": "<fg=blue;options=bold>Alias for \"test:ci\" and \"infect:show:ci\"</>"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": true
+        }
+    }
+}

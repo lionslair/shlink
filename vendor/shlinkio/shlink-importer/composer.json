@@ -1,0 +1,89 @@
+{
+    "name": "shlinkio/shlink-importer",
+    "type": "library",
+    "homepage": "https://shlink.io",
+    "description": "Collection of tools to import links from different sources and map them to a shlink-compliant format",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alejandro Celaya Alastrué",
+            "homepage": "https://www.alejandrocelaya.com",
+            "email": "alejandro@alejandrocelaya.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "laminas/laminas-servicemanager": "^3.16",
+        "league/csv": "^9.8",
+        "lstrojny/functional-php": "^1.17",
+        "shlinkio/shlink-config": "^2.0",
+        "symfony/console": "^6.1"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.4",
+        "infection/infection": "^0.26.15",
+        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "psr/http-factory": "^1.0",
+        "roave/security-advisories": "dev-master",
+        "shlinkio/php-coding-standard": "~2.3.0",
+        "symfony/var-dumper": "^6.1"
+    },
+    "suggest": {
+        "psr/http-client": "If you want to be able to import URLs from Bit.ly, YOURLS, Kutt.it or another Shlink instance",
+        "psr/http-factory": "If you want to be able to import URLs from Bit.ly, YOURLS, Kutt.it or another Shlink instance"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shlinkio\\Shlink\\Importer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShlinkioTest\\Shlink\\Importer\\": "test"
+        }
+    },
+    "scripts": {
+        "ci": [
+            "@cs",
+            "@stan",
+            "@test:ci",
+            "@infect:ci"
+        ],
+        "cs": "phpcs",
+        "cs:fix": "phpcbf",
+        "stan": "phpstan analyse src test config --level=8",
+        "test": "phpdbg -qrr vendor/bin/phpunit --order-by=random --testdox --colors=always",
+        "test:ci": "@test --coverage-clover=build/clover.xml --coverage-xml=build/coverage-xml --log-junit=build/junit.xml",
+        "test:pretty": "@test --coverage-html build/coverage-html",
+        "infect": "infection --threads=4 --min-msi=75 --log-verbosity=default --only-covered",
+        "infect:ci": "@infect --coverage=build --skip-initial-tests",
+        "infect:test": [
+            "@test:ci",
+            "@infect:ci"
+        ]
+    },
+    "scripts-descriptions": {
+        "ci": "<fg=blue;options=bold>Alias for \"cs\", \"stan\", \"test:ci\" and \"infect:ci\"</>",
+        "cs": "<fg=blue;options=bold>Checks coding styles</>",
+        "cs:fix": "<fg=blue;options=bold>Fixes coding styles, when possible</>",
+        "stan": "<fg=blue;options=bold>Inspects code with phpstan</>",
+        "test": "<fg=blue;options=bold>Runs unit tests with no coverage reports</>",
+        "test:ci": "<fg=blue;options=bold>Runs unit tests generating coverage reports and logs</>",
+        "test:pretty": "<fg=blue;options=bold>Runs unit tests generating coverage reports in html</>",
+        "test:infect": "<fg=blue;options=bold>Alias for \"test:ci\" and \"infect:show:ci\"</>",
+        "infect": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing</>",
+        "infect:ci": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing with existing reports and logs</>",
+        "infect:show": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing and shows applied mutators</>",
+        "infect:show:ci": "<fg=blue;options=bold>Checks unit tests quality applying mutation testing with existing reports and logs and shows applied mutators</>"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": true
+        }
+    }
+}

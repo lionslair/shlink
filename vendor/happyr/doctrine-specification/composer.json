@@ -1,0 +1,49 @@
+{
+    "name": "happyr/doctrine-specification",
+    "type": "library",
+    "description": "Specification Pattern for your Doctrine repositories",
+    "keywords": ["Doctrine", "Repository", "Specification"],
+    "homepage": "http://developer.happyr.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias@happyr.com"
+        },
+        {
+            "name": "Kacper Gunia",
+            "email": "kacper@gunia.me"
+        },
+        {
+            "name": "Peter Gribanov",
+            "email": "info@peter-gribanov.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "doctrine/orm": "~2.5",
+        "symfony/property-access": "^4.0 || ^5.2 || ^6.0",
+        "symfony/polyfill-php80": "^1.20"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Happyr\\DoctrineSpecification\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\Happyr\\DoctrineSpecification\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpspec run"
+    }
+}
